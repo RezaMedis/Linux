@@ -1,0 +1,61 @@
+----------------------------------------------------------------------
+|              Install Zabbix Agent on Linux (debian)                |
+----------------------------------------------------------------------
+
+link: https://www.zabbix.com/download?zabbix=6.0&os_distribution=debian&os_version=12&components=agent_2&db=&ws=
+for another OS you can chose from link:https://www.zabbix.com/download under *Zabbix Packages menu
+
+----------------------------------------------------------------------
+Install Zabbix repository:
+
+	root@debian:~# wget https://repo.zabbix.com/zabbix/6.0/debian/pool/main/z/zabbix-release/zabbix-release_latest_6.0+debian12_all.deb
+	root@debian:~# dpkg -i zabbix-release_latest_6.0+debian12_all.deb
+	root@debian:~# apt update 
+
+----------------------------------------------------------------------
+Install Zabbix agent 2:
+
+	root@debian:~# apt install zabbix-agent2 zabbix-agent2-plugin-*
+
+----------------------------------------------------------------------
+Create Configuration Directory and File:
+
+	root@debian:~# cp /etc/zabbix/zabbix_agent2.conf  /etc/zabbix/zabbix_agent2.conf.bkup
+	root@debian:~# vim /etc/zabbix/zabbix_agent2.conf
+
+----------------------------------------------------------------------
+Configure the Agent:
+
+	root@debian:~# cp zabbix_agentd.conf zabbix_agentd.conf.bkup
+	root@debian:~# nano zabbix_agentd.conf
+
+Change this lines:
+
+	Server=zabbix.local IP
+	ServerActive=127.0.0.1
+	Hostname=x_server 
+*(Change Server address with zabbix DNS/IP)
+*(Change ServerActive address with local loopback IP)
+*(Change Hostname with the ServerName)
+
+----------------------------------------------------------------------
+Start Zabbix agent 2 process:
+
+	root@debian:~# systemctl restart zabbix-agent2
+	root@debian:~# systemctl enable zabbix-agent2 
+
+----------------------------------------------------------------------
+Verify Installation:
+
+	root@debian:~# systemctl status zabbix-agent2
+
+----------------------------------------------------------------------
+Open Firewall Ports (Optional):
+
+	root@debian:~# ufw allow 10050/tcp
+	root@debian:~# ufw allow 10051/tcp
+
+
+-- You can continue configuring the settings in the Zabbix panel. --
+
+<-- END OF FILE! -->
