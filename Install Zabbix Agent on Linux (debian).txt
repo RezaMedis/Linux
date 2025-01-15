@@ -23,12 +23,6 @@ Create Configuration Directory and File:
 	root@debian:~# cp /etc/zabbix/zabbix_agent2.conf  /etc/zabbix/zabbix_agent2.conf.bkup
 	root@debian:~# vim /etc/zabbix/zabbix_agent2.conf
 
-----------------------------------------------------------------------
-Configure the Agent:
-
-	root@debian:~# cp zabbix_agentd.conf zabbix_agentd.conf.bkup
-	root@debian:~# nano zabbix_agentd.conf
-
 Change this lines:
 
 	Server=zabbix.local IP
@@ -56,6 +50,15 @@ Open Firewall Ports (Optional):
 	root@debian:~# ufw allow 10051/tcp
 
 
--- You can continue configuring the settings in the Zabbix panel. --
+----------------------------------------------------------------------
+|-- You can continue configuring the settings in the Zabbix panel. --|
+----------------------------------------------------------------------
+
+add a Host
+
+Templates -> Linux by Zabbix agent / Windows by zabbix_agent
+Groups ->  Virtual Machines
+Agent -> IP
+
 
 <-- END OF FILE! -->
